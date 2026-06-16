@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LandingGate from "@/components/LandingGate";
 import Link from "next/link";
 
 const STREAMS = [
@@ -18,7 +19,7 @@ const HOW = [
 
 export default function HomePage() {
   return (
-    <>
+    <LandingGate>
       <Navbar />
       <main className="pt-20 overflow-x-hidden">
 
@@ -172,6 +173,6 @@ export default function HomePage() {
           </a>
         ))}
       </div>
-    </>
+    </LandingGate>
   );
 }
