@@ -40,22 +40,6 @@ type Opp = {
   is_featured: boolean;
 };
 
-function daysLeft(deadline: string) {
-  const d = new Date(deadline).getTime() - Date.now();
-  const days = Math.ceil(d / (1000 * 60 * 60 * 24));
-  if (days < 0) return "Closed";
-  if (days === 0) return "Today!";
-  if (days <= 7) return `${days}d left`;
-  return new Date(deadline).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
-}
-
-function urgencyColor(deadline: string) {
-  const days = Math.ceil((new Date(deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-  if (days < 0) return "text-[#4A4A4A]/50";
-  if (days <= 7) return "text-red-600 font-bold";
-  if (days <= 30) return "text-orange-500 font-semibold";
-  return "text-[#3A2E5C]/60";
-}
 
 export default function Dashboard() {
   const [opps, setOpps] = useState<Opp[]>([]);
@@ -267,8 +251,6 @@ function OppCard({ opp, i, saved, onSave, expanded, onExpand }: {
   opp: Opp; i: number; saved: boolean; onSave: () => void; expanded: boolean; onExpand: () => void;
 }) {
   const bg = CARD_COLORS[i % CARD_COLORS.length];
-  const dl = daysLeft(opp.deadline);
-  const uc = urgencyColor(opp.deadline);
 
   return (
     <div className={`${bg} border-2 border-[#3A2E5C] rounded-3xl p-5 jelly-shadow flex flex-col justify-between transition-all hover:-translate-y-0.5 ${expanded ? "ring-2 ring-[#3A2E5C]" : ""}`}>
@@ -298,11 +280,7 @@ function OppCard({ opp, i, saved, onSave, expanded, onExpand }: {
       </div>
 
       {/* Bottom row */}
-      <div className="mt-3">
-        <div className="flex items-center gap-1 mb-3">
-          <span className="material-symbols-outlined text-sm text-[#3A2E5C]/50" style={{ fontSize: "14px" }}>schedule</span>
-          <span className={`text-xs ${uc}`} style={{ fontFamily: '"Space Grotesk",sans-serif' }}>{dl}</span>
-        </div>
+      <div className="mt-4">
         <div className="flex gap-2">
           <button onClick={onExpand} className="flex-1 bg-white/60 hover:bg-white border-2 border-[#3A2E5C]/20 hover:border-[#3A2E5C] text-[#3A2E5C] text-xs font-bold py-2 rounded-xl transition-all" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>
             {expanded ? "Less" : "Details"}
