@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
     if (type && type !== "All") query = query.eq("type", type);
     if (q) query = query.ilike("title", `%${q}%`);
 
-    const { data, error } = await query.limit(200);
+    const { data, error } = await query.limit(1000);
     if (error) return NextResponse.json({ opportunities: MOCK });
     return NextResponse.json({ opportunities: data?.length ? data : MOCK });
   } catch {
