@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/lib/supabase";
+import { SOCIAL, href, isSet } from "@/lib/links";
 
 const STREAMS = ["All", "STEM", "Commerce", "Law", "Humanities", "Impact"];
 const TYPES = ["All", "Hackathon", "Internship", "MUN", "Scholarship", "Quest"];
@@ -121,11 +122,23 @@ export default function Dashboard() {
       <main className="pt-24 min-h-screen bg-[#FFFDF7] pb-28 md:pb-16">
 
         {/* Header */}
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-6 mb-6">
-          <h1 className="font-black text-[36px] md:text-[44px] text-[#3A2E5C] leading-tight" style={{ fontFamily: '"Bricolage Grotesque",sans-serif', letterSpacing: "-0.02em" }}>
-            Discovery Feed
-          </h1>
-          <p className="text-[#4A4A4A] mt-1 text-sm">Opportunities curated for students aged 14-22. Updated weekly.</p>
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-6 mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <h1 className="font-black text-[36px] md:text-[44px] text-[#3A2E5C] leading-tight" style={{ fontFamily: '"Bricolage Grotesque",sans-serif', letterSpacing: "-0.02em" }}>
+              Discovery Feed
+            </h1>
+            <p className="text-[#4A4A4A] mt-1 text-sm">Opportunities curated for students aged 14-22. Updated weekly.</p>
+          </div>
+          <a
+            href={href(SOCIAL.submitForm)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`glossy-button bg-[#3A2E5C] text-white text-sm font-bold px-5 py-2.5 rounded-xl jelly-shadow-sm jelly-active flex items-center gap-1.5 shrink-0 self-start ${!isSet(SOCIAL.submitForm) ? "opacity-60 pointer-events-none" : ""}`}
+            style={{ fontFamily: '"Space Grotesk",sans-serif' }}
+          >
+            <span className="material-symbols-outlined text-lg">add_circle</span>
+            Submit an opportunity{!isSet(SOCIAL.submitForm) && " (soon)"}
+          </a>
         </div>
 
         {/* Search bar */}

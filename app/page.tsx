@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LandingGate from "@/components/LandingGate";
+import Community from "@/components/Community";
 import Link from "next/link";
 
 const STREAMS = [
@@ -147,6 +148,9 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
+        {/* JOIN THE COMMUNITY */}
+        <Community />
 
         <section className="px-6 md:px-10 pb-20">
           <div className="max-w-[1200px] mx-auto bg-[#3A2E5C] text-white rounded-[3rem] p-12 md:p-20 relative overflow-hidden jelly-shadow">
