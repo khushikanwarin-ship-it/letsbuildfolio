@@ -53,7 +53,15 @@ export default function Dashboard() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Load logged-in user and their existing saved opportunities
+  // Personalize default stream from onboarding prefs (instant, no flicker)
+  useEffect(() => {
+    try {
+      const prefs = JSON.parse(localStorage.getItem("lbf-prefs") || "null");
+      if (prefs?.stream && prefs.stream !== "All") setStream(prefs.stream);
+    } catch { /* ignore */ }
+  }, []);
+
+  // Load logged-in user, their saved opportunities, and their saved stream
   useEffect(() => {
     (async () => {
       const { data } = await supabase.auth.getUser();
@@ -64,6 +72,8 @@ export default function Dashboard() {
           .select("opportunity_id")
           .eq("user_id", data.user.id);
         if (rows) setSaved(new Set(rows.map(r => r.opportunity_id as string)));
+        const { data: prof } = await supabase.from("profiles").select("stream").eq("id", data.user.id).single();
+        if (prof?.stream && prof.stream !== "All") setStream(prof.stream);
       }
     })();
   }, []);

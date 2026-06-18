@@ -35,7 +35,8 @@ function AuthForm() {
         password: form.password,
       });
       if (signInError) throw new Error(signInError.message);
-      router.push("/profile");
+      // New signups go through the onboarding quiz; returning users go to their feed
+      router.push(tab === "signup" ? "/onboarding" : "/dashboard");
       router.refresh();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong");
