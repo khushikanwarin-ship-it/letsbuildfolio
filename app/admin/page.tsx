@@ -143,9 +143,14 @@ export default function AdminPage() {
             <h1 className="font-black text-3xl text-[#3A2E5C]" style={{ fontFamily: '"Bricolage Grotesque",sans-serif' }}>Manage Opportunities</h1>
             <p className="text-[#4A4A4A] text-sm">{list.length} total in your feed</p>
           </div>
-          <button onClick={startAdd} className="glossy-button bg-[#3A2E5C] text-white text-sm font-bold px-5 py-2.5 rounded-xl jelly-shadow-sm jelly-active flex items-center gap-1 shrink-0" style={labelStyle}>
-            <span className="material-symbols-outlined text-lg">add</span> Add new
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <a href="/admin/insights" className="text-[#3A2E5C] font-bold text-sm hover:underline flex items-center gap-1" style={labelStyle}>
+              <span className="material-symbols-outlined text-lg">insights</span> Insights
+            </a>
+            <button onClick={startAdd} className="glossy-button bg-[#3A2E5C] text-white text-sm font-bold px-5 py-2.5 rounded-xl jelly-shadow-sm jelly-active flex items-center gap-1" style={labelStyle}>
+              <span className="material-symbols-outlined text-lg">add</span> Add new
+            </button>
+          </div>
         </div>
 
         {msg && <div className="bg-green-50 border-2 border-green-200 rounded-xl p-3 mb-4 text-green-700 text-sm">{msg}</div>}
