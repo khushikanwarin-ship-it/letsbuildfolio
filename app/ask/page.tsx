@@ -1,7 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from "@/lib/supabase";
 
 const STARTERS = [
   "What stream should I choose after 10th?",
@@ -15,10 +17,19 @@ type Msg = { role: "user" | "ai"; text: string };
 
 export default function AskPage() {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "ai", text: "Hey! I am your AI consultant powered by Claude. Ask me anything about opportunities, career paths, scholarships, or building your portfolio. I am here to help you figure out your next move." },
+    { role: "ai", text: "Hey! I am your AI consultant. Ask me anything about opportunities, career paths, scholarships, or building your portfolio. I am here to help you figure out your next move." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setLoggedIn(!!data.user);
+      setAuthChecked(true);
+    });
+  }, []);
 
   async function send(text: string) {
     if (!text.trim()) return;
@@ -41,13 +52,38 @@ export default function AskPage() {
     }
   }
 
+  // ── Login gate: AI consultant is for members only ──
+  if (authChecked && !loggedIn) {
+    return (
+      <>
+        <Navbar />
+        <main className="pt-24 min-h-screen bg-[#FFFDF7] flex items-center justify-center px-4">
+          <div className="relative w-full max-w-md">
+            <div className="absolute inset-0 bg-[#FFC6E5] rounded-3xl translate-x-3 translate-y-3 -z-10 border-2 border-[#3A2E5C]" />
+            <div className="bg-[#FFFDF7] rounded-3xl border-2 border-[#3A2E5C] p-8 text-center">
+              <div className="w-16 h-16 bg-[#AEE3FF] rounded-full border-2 border-[#3A2E5C] flex items-center justify-center mx-auto mb-4">
+                <span className="material-symbols-outlined text-3xl text-[#3A2E5C]">psychology</span>
+              </div>
+              <h1 className="font-black text-2xl text-[#3A2E5C] mb-2" style={{ fontFamily: '"Bricolage Grotesque",sans-serif' }}>Your AI consultant awaits</h1>
+              <p className="text-[#4A4A4A] text-sm mb-6">Create a free account to chat with your personal AI guide about scholarships, applications, and your next move.</p>
+              <Link href="/auth?tab=signup" className="glossy-button bg-[#3A2E5C] text-white px-8 py-3 rounded-xl font-bold text-sm jelly-shadow-sm jelly-active inline-block mb-3" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>
+                Sign up free
+              </Link>
+              <p className="text-xs text-[#4A4A4A]">Already have an account? <Link href="/auth" className="text-[#3A2E5C] font-bold hover:underline">Log in</Link></p>
+            </div>
+          </div>
+        </main>
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />
       <main className="pt-24 min-h-screen bg-[#FFFDF7] flex flex-col">
         <div className="max-w-[800px] mx-auto w-full flex-1 flex flex-col px-4 pb-6">
           <div className="py-6 text-center">
-            <span className="text-xs font-bold text-[#3A2E5C]/50 uppercase tracking-widest" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>Powered by Claude</span>
+            <span className="text-xs font-bold text-[#3A2E5C]/50 uppercase tracking-widest" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>Your AI consultant</span>
             <h1 className="font-black text-[36px] text-[#3A2E5C] mt-1" style={{ fontFamily: '"Bricolage Grotesque",sans-serif', letterSpacing: "-0.01em" }}>Ask Anything</h1>
           </div>
 
