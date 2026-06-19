@@ -5,6 +5,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "LetsBuildFolio - Build the Future",
   description: "A discovery and portfolio platform for students aged 14-22.",
+  verification: {
+    google: "MlPJNSM-FJRvWjFJwUxsxhic9t10ofFPfGFiKLTYlos",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
