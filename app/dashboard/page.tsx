@@ -54,7 +54,7 @@ export default function Dashboard() {
   const [userId, setUserId] = useState<string | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  const GUEST_LIMIT = 10;
+  const GUEST_LIMIT = 5;
 
   // Personalize default stream from onboarding prefs (instant, no flicker)
   useEffect(() => {

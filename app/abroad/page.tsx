@@ -1,7 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from "@/lib/supabase";
 
 type College = { name: string; fee: string; aid: string };
 type Dest = {
@@ -111,8 +113,19 @@ const TIPS = [
 ];
 
 export default function AbroadPage() {
+  const router = useRouter();
   const [selected, setSelected] = useState<Dest | null>(null);
+  const [loggedIn, setLoggedIn] = useState(true);
   const isIvy = selected?.key.includes("Ivy");
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setLoggedIn(!!data.user));
+  }, []);
+
+  function open(d: Dest) {
+    if (loggedIn) setSelected(d);
+    else router.push("/auth?tab=signup");
+  }
 
   return (
     <>
@@ -125,7 +138,7 @@ export default function AbroadPage() {
 
           {/* Ivy League feature box */}
           <button
-            onClick={() => setSelected(IVY)}
+            onClick={() => open(IVY)}
             className="w-full text-left bg-[#3A2E5C] text-white border-2 border-[#3A2E5C] rounded-3xl p-6 md:p-8 jelly-shadow mb-8 relative overflow-hidden hover:-translate-y-1 transition-transform"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
@@ -147,7 +160,7 @@ export default function AbroadPage() {
             {DESTINATIONS.map((c, i) => (
               <button
                 key={c.key}
-                onClick={() => setSelected(c)}
+                onClick={() => open(c)}
                 className={`${c.color} text-left border-2 border-[#3A2E5C] rounded-2xl p-5 jelly-shadow hover:-translate-y-1 transition-transform ${i % 2 === 0 ? "sticker-rotate-neg hover:rotate-0" : "sticker-rotate-pos hover:rotate-0"}`}
               >
                 <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center border-2 border-[#3A2E5C] mb-3 font-black text-sm text-[#3A2E5C]" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>{c.flag}</div>

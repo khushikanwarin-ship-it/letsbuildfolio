@@ -65,7 +65,7 @@ export default function HomePage() {
 
         <section className="px-6 md:px-10 py-16 max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-8 bg-[#AEE3FF] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow flex flex-col justify-between hover:-translate-y-1 transition-transform">
+            <Link href="/dashboard" className="md:col-span-8 bg-[#AEE3FF] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow flex flex-col justify-between hover:-translate-y-1 transition-transform">
               <div>
                 <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 border-2 border-[#3A2E5C] sticker-rotate-neg">
                   <span className="material-symbols-outlined text-[#3A2E5C] text-3xl">search</span>
@@ -78,8 +78,8 @@ export default function HomePage() {
                   <span key={tag} className="px-3 py-1 bg-white border border-[#3A2E5C] rounded-full text-xs font-semibold text-[#3A2E5C]" style={{fontFamily:'"Space Grotesk",sans-serif'}}>{tag}</span>
                 ))}
               </div>
-            </div>
-            <div className="md:col-span-4 bg-[#FFC6E5] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow sticker-rotate-neg hover:rotate-0 transition-all">
+            </Link>
+            <Link href="/quests" className="md:col-span-4 bg-[#FFC6E5] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow sticker-rotate-neg hover:rotate-0 transition-all">
               <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 border-2 border-[#3A2E5C]">
                 <span className="material-symbols-outlined text-[#3A2E5C] text-3xl">emoji_events</span>
               </div>
@@ -93,8 +93,8 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="md:col-span-5 bg-[#D5C6FF] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow hover:-translate-y-1 transition-transform">
+            </Link>
+            <Link href="/abroad" className="md:col-span-5 bg-[#D5C6FF] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow hover:-translate-y-1 transition-transform">
               <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 border-2 border-[#3A2E5C] sticker-rotate-pos">
                 <span className="material-symbols-outlined text-[#3A2E5C] text-3xl">public</span>
               </div>
@@ -105,8 +105,8 @@ export default function HomePage() {
                   <div key={c} className="px-3 py-1 bg-white border border-[#3A2E5C] rounded-full text-xs font-semibold text-[#3A2E5C]" style={{fontFamily:'"Space Grotesk",sans-serif'}}>{c}</div>
                 ))}
               </div>
-            </div>
-            <div className="md:col-span-7 bg-[#ECE7EB] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow flex items-center gap-6">
+            </Link>
+            <Link href="/ask" className="md:col-span-7 bg-[#ECE7EB] p-6 rounded-3xl border-2 border-[#3A2E5C] jelly-shadow flex items-center gap-6">
               <div className="flex-1">
                 <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4 border-2 border-[#3A2E5C]">
                   <span className="material-symbols-outlined text-[#3A2E5C] text-3xl">psychology</span>
@@ -117,9 +117,12 @@ export default function HomePage() {
               <div className="hidden md:flex w-36 h-36 bg-white border-2 border-[#3A2E5C] rounded-full jelly-shadow-sm items-center justify-center shrink-0">
                 <span className="material-symbols-outlined text-5xl text-[#3A2E5C]">bubbles</span>
               </div>
-            </div>
+            </Link>
           </div>
         </section>
+
+        {/* JOIN THE COMMUNITY — placed high so visitors see it early */}
+        <Community />
 
         <section className="bg-[#F3F3F5] py-20 px-6 md:px-10 border-y-2 border-dashed border-[#3A2E5C]/20">
           <div className="max-w-[1200px] mx-auto text-center">
@@ -148,9 +151,6 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-
-        {/* JOIN THE COMMUNITY */}
-        <Community />
 
         <section className="px-6 md:px-10 pb-20">
           <div className="max-w-[1200px] mx-auto bg-[#3A2E5C] text-white rounded-[3rem] p-12 md:p-20 relative overflow-hidden jelly-shadow">

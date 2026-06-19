@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GuideGate from "@/components/GuideGate";
 import { GUIDES } from "@/lib/guides";
 
 export function generateStaticParams() {
@@ -42,7 +43,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           <h1 className="font-black text-3xl md:text-4xl text-[#3A2E5C] leading-tight" style={{ fontFamily: '"Bricolage Grotesque",sans-serif', letterSpacing: "-0.02em" }}>{guide.title}</h1>
         </div>
 
-        {/* Body */}
+        {/* Body (members only) */}
+        <GuideGate>
         <article className="flex flex-col gap-5">
           {guide.blocks.map((b, i) => (
             <div key={i}>
@@ -61,6 +63,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             </div>
           ))}
         </article>
+        </GuideGate>
 
         {/* CTA */}
         <div className="bg-[#3A2E5C] text-white rounded-3xl p-6 md:p-8 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 jelly-shadow">
