@@ -15,6 +15,8 @@ export const SOCIAL = {
   // Get it from your form: Send → < > (embed) → copy the src="..." URL.
   // It looks like: https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true
   realtalkForm: "https://docs.google.com/forms/d/e/1FAIpQLSfz01yhTq6Y2SELhzJ6wYxgPGk0R_-E7oYn6cXp-xMLM6V4fw/viewform?embedded=true",
+  // Direct (non-embedded) link to open the Realtalk Google Form in a new tab
+  realtalkFormPublic: "https://docs.google.com/forms/d/e/1FAIpQLSfz01yhTq6Y2SELhzJ6wYxgPGk0R_-E7oYn6cXp-xMLM6V4fw/viewform",
 };
 
 // Helper: returns a usable href, or "#" if not set yet

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { SOCIAL } from "@/lib/links";
 
-const NAV = [["Opportunities","/dashboard"],["Quests","/quests"],["Abroad","/abroad"],["Guides","/resources"],["Ask AI","/ask"],["Realtalk","/realtalk"]];
+const NAV = [["Opportunities","/dashboard"],["Quests","/quests"],["Abroad","/abroad"],["Guides","/resources"],["Ask AI","/ask"],["Realtalk", SOCIAL.realtalkFormPublic]];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -38,7 +39,11 @@ export default function Navbar() {
         </Link>
         <div className="hidden md:flex gap-8 items-center">
           {NAV.map(([label,href]) => (
-            <Link key={label} href={href} className="text-[#4A4A4A] hover:text-[#3A2E5C] transition-colors font-semibold text-sm" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>{label}</Link>
+            href.startsWith("http") ? (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-[#4A4A4A] hover:text-[#3A2E5C] transition-colors font-semibold text-sm" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>{label}</a>
+            ) : (
+              <Link key={label} href={href} className="text-[#4A4A4A] hover:text-[#3A2E5C] transition-colors font-semibold text-sm" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>{label}</Link>
+            )
           ))}
         </div>
         <div className="flex items-center gap-3">
@@ -66,7 +71,11 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-[#FFFDF7] border-t-2 border-[#3A2E5C]/20 px-6 py-4 flex flex-col gap-4">
           {NAV.map(([label,href]) => (
-            <Link key={label} href={href} className="text-[#3A2E5C] font-semibold text-base" style={{ fontFamily: '"Space Grotesk",sans-serif' }} onClick={() => setOpen(false)}>{label}</Link>
+            href.startsWith("http") ? (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-[#3A2E5C] font-semibold text-base" onClick={() => setOpen(false)}>{label}</a>
+            ) : (
+              <Link key={label} href={href} className="text-[#3A2E5C] font-semibold text-base" style={{ fontFamily: '"Space Grotesk",sans-serif' }} onClick={() => setOpen(false)}>{label}</Link>
+            )
           ))}
           {ready && name ? (
             <>
