@@ -70,6 +70,12 @@ export default function AskPage() {
                 Sign up free
               </Link>
               <p className="text-xs text-[#4A4A4A]">Already have an account? <Link href="/auth" className="text-[#3A2E5C] font-bold hover:underline">Log in</Link></p>
+              <div className="border-t-2 border-[#3A2E5C]/10 mt-6 pt-5">
+                <p className="text-xs text-[#4A4A4A] mb-3">Not ready to sign up? Tell me where you&apos;re really at:</p>
+                <Link href="/realtalk" className="inline-flex items-center gap-1 bg-[#FFC6E5] text-[#3A2E5C] border-2 border-[#3A2E5C] px-4 py-2 rounded-full font-bold text-xs jelly-shadow-sm jelly-active" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>
+                  Take the realtalk check <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_forward</span>
+                </Link>
+              </div>
             </div>
           </div>
         </main>
@@ -85,6 +91,9 @@ export default function AskPage() {
           <div className="py-6 text-center">
             <span className="text-xs font-bold text-[#3A2E5C]/50 uppercase tracking-widest" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>Your AI consultant</span>
             <h1 className="font-black text-[36px] text-[#3A2E5C] mt-1" style={{ fontFamily: '"Bricolage Grotesque",sans-serif', letterSpacing: "-0.01em" }}>Ask Anything</h1>
+            <Link href="/realtalk" className="inline-flex items-center gap-1 mt-3 bg-[#FFC6E5] text-[#3A2E5C] border-2 border-[#3A2E5C] px-4 py-2 rounded-full font-bold text-xs jelly-shadow-sm jelly-active" style={{ fontFamily: '"Space Grotesk",sans-serif' }}>
+              Take the realtalk check <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>arrow_forward</span>
+            </Link>
           </div>
 
           {messages.length <= 1 && (

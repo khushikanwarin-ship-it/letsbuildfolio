@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
-const NAV = [["Opportunities","/dashboard"],["Quests","/quests"],["Abroad","/abroad"],["Guides","/resources"],["Ask AI","/ask"]];
+const NAV = [["Opportunities","/dashboard"],["Quests","/quests"],["Abroad","/abroad"],["Guides","/resources"],["Ask AI","/ask"],["Realtalk","/realtalk"]];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
